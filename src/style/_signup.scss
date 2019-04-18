@@ -1,0 +1,15 @@
+.signup {
+    display: flex;
+    height: 100vh;
+    background: var(--turquoise);
+
+    &__left,
+    &__right {
+        flex: 1;
+    }
+    &__left {
+    }
+    &__right {
+        background: white;
+    }
+}
