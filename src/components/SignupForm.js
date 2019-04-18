@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-
+import {connect} from "react-redux";
+import {submit_user} from "../actions/userActions"
 
 class SignupForm extends Component {
   state = {
-      full_name: "",
+      name: "",
       email: "",
       password: "",
-      username: ""
+      username: "",
+      errors: []
   };
 
   handleInput = (e) => {
@@ -15,21 +17,63 @@ class SignupForm extends Component {
     });
   }
 
+  handleSubmit = (e) => {
+      e.preventDefault();
+      const userData = {...this.state};
+      this.props.submitUser(userData).then(response => {
+          if(this.props.user.errors){
+              this.setState({
+                  errors: this.props.user.errors
+              })
+          }
+      })
+  }
+
+  errorDisplay = () => {
+      const errorsList = this.state.errors
+      if(errorsList.length > 0){
+          return (
+            <ul className="error-list">
+               {errorsList.map((error, i) => {
+                    return <li key={i}>{error}</li>
+                })}
+            </ul>
+            )
+      }
+  }
+
   render() {
     return (
-      <form className="signup__right--form" >
-        <label htmlFor="full_name">Full Name <input type="text" name="full_name" id="full_name" placeholder="Full Name" onChange={e => this.handleInput(e)}/></label>
-        <label htmlFor="email">Email <input type="text" name="email" id="email" placeholder="Email" onChange={e => this.handleInput(e)}/></label>
-        <label htmlFor="username">Username <input type="text" name="username" id="username" placeholder="Username" onChange={e => this.handleInput(e)}/></label>
-        <label htmlFor="password">Password <input type="password" name="password" id="password" placeholder="Password" onChange={e => this.handleInput(e)}/></label>
-        <label htmlFor="acknowledge">
-            <input type="checkbox" name="acknowledge" id="acknowledge" />
-            <p>Creating an account means you have read and accept our <a href="#">Privacy Policy</a> and <a href="#">Terms and Condition</a></p>
-        </label>
-        <button>Create an account</button>
-      </form>
+    <>
+        {this.errorDisplay()}
+        <form className="signup__right--form" onSubmit={e => this.handleSubmit(e)}>
+            <label htmlFor="full_name">Full Name <input type="text" name="name" id="full_name" placeholder="Full Name" onChange={e => this.handleInput(e)}/></label>
+            <label htmlFor="email">Email <input type="text" name="email" id="email" placeholder="Email" onChange={e => this.handleInput(e)}/></label>
+            <label htmlFor="username">Username <input type="text" name="username" id="username" placeholder="Username" onChange={e => this.handleInput(e)}/></label>
+            <label htmlFor="password">Password <input type="password" name="password" id="password" placeholder="Password" onChange={e => this.handleInput(e)}/></label>
+            <label htmlFor="acknowledge">
+                <input type="checkbox" name="acknowledge" id="acknowledge" />
+                <p>Creating an account means you have read and accept our <a href="#">Privacy Policy</a> and <a href="#">Terms and Condition</a></p>
+            </label>
+            <button onClick={e => this.handleSubmit(e)}>Create an account</button>
+        </form>
+    </>
     )
   }
 }
 
-export default SignupForm;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        submitUser: (data) => {
+            return dispatch(submit_user(data));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
