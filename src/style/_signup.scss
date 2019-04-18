@@ -8,6 +8,27 @@
         flex: 1;
     }
     &__left {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        #imgLeft,
+        #imgRight {
+            position: absolute;
+            height: 30rem;
+            width: 30rem;
+        }
+        #imgLeft {
+            top: 0;
+            left: 0;
+        }
+        #imgRight {
+            right: 0;
+            bottom: 0;
+        }
+        &--logo {
+
+        }
     }
     &__right {
         background: white;
