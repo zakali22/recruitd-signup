@@ -11,9 +11,23 @@
 
 :root {
     --turquoise: #00cba7;
+    --light-grey: #c1c3d3;
+    --border-grey:  #eee;
+    --link-color: #004a6d;
+    --dark-grey: rgb(70, 70, 70);
 }
 
 html {
     box-sizing: border-box;
     font-size: 62.5%; //1rem = 10px
+}
+
+a {
+    &:link,
+    &:visited,
+    &:active,
+    &:hover {
+        text-decoration: none;
+        font-weight: 700;
+    }
 }

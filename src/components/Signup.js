@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SignupForm from "./SignupForm";
 
 class Signup extends Component {
   render() {
@@ -10,7 +11,10 @@ class Signup extends Component {
           <img src="/images/bottom.png" alt="Bottom right image" id="imgRight" />
         </div>
         <div className="signup__right">
-
+          <div className="signup__right--container"> 
+            <p>Already have an account? <a href="#" style={{"textDecoration": "underline", "fontSize": "1.5rem"}}>Sign in here</a>.</p>
+            <SignupForm /> 
+          </div>
         </div>
       </div>
     );
