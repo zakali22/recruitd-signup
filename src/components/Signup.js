@@ -12,7 +12,8 @@ class Signup extends Component {
         </div>
         <div className="signup__right">
           <div className="signup__right--container"> 
-            <p>Already have an account? <a href="#" style={{"textDecoration": "underline", "fontSize": "1.5rem"}}>Sign in here</a>.</p>
+            <p>Already have an account? <a href="#" style={{"textDecoration": "underline", "fontSize": "1.5rem"}}>Sign in here</a></p>
+            <hr />
             <SignupForm /> 
           </div>
         </div>

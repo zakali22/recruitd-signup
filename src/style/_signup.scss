@@ -1,13 +1,18 @@
 .signup {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     height: 100vh;
     background: var(--turquoise);
     font-family: "Poppins", sans-serif;
 
-    &__left,
-    &__right {
-        flex: 1;
+    @media only screen and (max-width: 65em){
+        grid-template-columns: 1fr;
     }
+
+    @media only screen and (max-height: 50em){
+        grid-template-rows: 15rem 1fr;
+    }
+
     &__left {
         position: relative;
         display: flex;
@@ -26,21 +31,46 @@
         #imgRight {
             right: 0;
             bottom: 0;
+            @media only screen and (max-width: 65em){
+                display: none;
+            }
         }
         &--logo {
-
+            z-index: 1000;
+        }
+        @media only screen and (max-width: 65em){
+            flex-basis: 20%;
         }
     }
     &__right {
+        z-index: 1000;
         background: white;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         justify-content: center;
         align-items: center;
+        @media only screen and (max-width: 65em){
+            padding: 4rem;
+            align-items: start;
+        }
         &--container {
             grid-column: 3 / 7;
+            @media only screen and (max-width: 85em){
+                grid-column: 2 / 8;
+            }
+            @media only screen and (max-width: 65em){
+                grid-column: 1 / -1;
+            }
+            
             & > *:not(:last-child) {
                 margin-bottom: 2rem;
+            }
+            hr {
+                color: var(--border-grey);
+                display: none;
+                @media only screen and (max-width: 65em){
+                    display: block;
+                }
             }
             p {
                 font-size: 1.5rem;
@@ -53,6 +83,7 @@
                     &:hover {
                         color: var(--link-color);
                         font-size: 1.3rem;
+                        
                     }
                 }
             }
@@ -72,25 +103,28 @@
                 font-size: 1.4rem;
                 color: var(--dark-grey);
                 &:nth-of-type(5){
+                    align-items: center;
                     input {
                         margin-right: 1rem;
                     }
                 }
                 input {
-                    margin-top: 1rem;
-                    border: 1px solid var(--border-grey);
-                    border-radius: .5rem;
-                    padding: 1.5rem 1.3rem;
-                    &::placeholder {
-                        font-size: 1.5rem;
-                        font-family: "Poppins", sans-serif;
-                        color: var(--light-grey);
+                    &[type="text"], 
+                    &[type="password"] {
+                        margin-top: 1rem;
+                        border: 1px solid var(--border-grey);
+                        border-radius: .5rem;
+                        padding: 1.5rem 1.3rem;
+                        &::placeholder {
+                            font-size: 1.5rem;
+                            font-family: "Poppins", sans-serif;
+                            color: var(--light-grey);
+                        }
+                        &:focus {
+                            outline: none;
+                            border: 1px solid var(--turquoise)
+                        }
                     }
-                    &:focus {
-                        outline: none;
-                        border: 1px solid var(--turquoise)
-                    }
-                
                 }
             }
             button {
