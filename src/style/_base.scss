@@ -15,6 +15,7 @@
     --border-grey:  #eee;
     --link-color: #004a6d;
     --dark-grey: rgb(70, 70, 70);
+    --error: #f2dede;
 }
 
 html {
@@ -29,5 +30,20 @@ a {
     &:hover {
         text-decoration: none;
         font-weight: 700;
+    }
+}
+
+.error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        background: var(--error);
+        padding: .5rem;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.1rem;
+        &:not(:last-of-type){
+            margin-bottom: 1.5rem;
+        }
     }
 }
