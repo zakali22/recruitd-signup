@@ -8,22 +8,41 @@ class SignupForm extends Component {
       email: "",
       password: "",
       username: "",
+      acknowledge: false,
       errors: []
   };
 
   handleInput = (e) => {
-    this.setState({
-        [e.target.name]: e.target.value
-    });
+    if(e.target.name === "acknowledge"){
+        this.setState({
+            acknowledge: e.target.checked
+        })
+    } else {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
   }
 
   handleSubmit = (e) => {
       e.preventDefault();
-      const userData = {...this.state};
+      const {name, password, email} = this.state;
+      const userData = {
+          name, 
+          email,
+          password,
+          passwordConfirmation: password
+      };
+      console.log(userData);
       this.props.submitUser(userData).then(response => {
           if(this.props.user.errors){
               this.setState({
                   errors: this.props.user.errors
+              })
+          }
+          if(!this.state.acknowledge){
+              this.setState({
+                  errors: this.state.errors.concat("Please agree to Terms and Conditions")
               })
           }
       })
@@ -52,7 +71,7 @@ class SignupForm extends Component {
             <label htmlFor="username">Username <input type="text" name="username" id="username" placeholder="Username" onChange={e => this.handleInput(e)}/></label>
             <label htmlFor="password">Password <input type="password" name="password" id="password" placeholder="Password" onChange={e => this.handleInput(e)}/></label>
             <label htmlFor="acknowledge">
-                <input type="checkbox" name="acknowledge" id="acknowledge" />
+                <input type="checkbox" name="acknowledge" id="acknowledge" onChange={e => this.handleInput(e)}/>
                 <p>Creating an account means you have read and accept our <a href="#">Privacy Policy</a> and <a href="#">Terms and Condition</a></p>
             </label>
             <button onClick={e => this.handleSubmit(e)}>Create an account</button>
