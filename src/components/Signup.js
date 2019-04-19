@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SignupForm from "./SignupForm";
+import {connect} from "react-redux";
 
 class Signup extends Component {
   render() {
@@ -12,9 +13,19 @@ class Signup extends Component {
         </div>
         <div className="signup__right">
           <div className="signup__right--container"> 
-            <p>Already have an account? <a href="#" style={{"textDecoration": "underline", "fontSize": "1.5rem"}}>Sign in here</a></p>
-            <hr />
-            <SignupForm /> 
+            {!this.props.user.login_status ? (
+              <>
+                <p>Already have an account? <a href="#" style={{"textDecoration": "underline", "fontSize": "1.5rem"}}>Sign in here</a></p>
+                <hr />
+                <SignupForm />
+              </>
+            ) : (
+              <>
+                <div className="login_success">
+                  <p>Thank you! You have successfully registered</p>
+                </div>
+              </>
+            ) } 
           </div>
         </div>
       </div>
@@ -22,4 +33,10 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(Signup);

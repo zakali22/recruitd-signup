@@ -36,9 +36,11 @@ class SignupForm extends Component {
       console.log(userData);
       this.props.submitUser(userData).then(response => {
           if(this.props.user.errors){
-              this.setState({
-                  errors: this.props.user.errors
-              })
+            if(this.props.user.errors.length > 0){
+                this.setState({
+                    errors: this.props.user.errors
+                })
+            }
           }
           if(!this.state.acknowledge){
               this.setState({

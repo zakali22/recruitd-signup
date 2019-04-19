@@ -4,9 +4,10 @@ import axios from "axios";
 export const submit_user = async (data) => {
     try {
         const res = await axios.post("https://staging-api.recruitd.co.uk/professional_auth/", data);
+        console.log(res)
         return {
             type: SUBMIT_USER_SUCCESS,
-            payload: res
+            payload: res.data.data
         }
     } catch(error){
         const errorResponse = error.response.data.errors;
