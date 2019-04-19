@@ -16,6 +16,7 @@
     --link-color: #004a6d;
     --dark-grey: rgb(70, 70, 70);
     --error: #f2dede;
+    --success-message: #dff0d8;
 }
 
 html {
@@ -45,5 +46,13 @@ a {
         &:not(:last-of-type){
             margin-bottom: 1.5rem;
         }
+    }
+}
+
+.login_success {
+    background: var(--success-message);
+    padding: 1rem;
+    p {
+        color: black !important;
     }
 }
